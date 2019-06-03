@@ -17,3 +17,9 @@ target_link_libraries(testing Saber)
 #        List.cpp
 #        List.h
 #        testing.cpp)˚
+
+add_executable(task2
+        Task2.cpp)
+
+add_executable(task1
+        Task1.cpp )

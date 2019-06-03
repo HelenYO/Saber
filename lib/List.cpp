@@ -51,10 +51,14 @@ void List::Serialize(std::ostream &stream) {
     std::unordered_map<ListNode *, int> map;
     for (auto node = head; node != nullptr; node = node->next) {
         map.emplace(node->next, number++);
-        stream << node->data << std::endl;
     }
     for (auto node = head; node != nullptr; node = node->next) {
-        number = map.find(node->rand->next)->second;
+        stream << node->data << std::endl;
+        //stream.write((char*)&node->rand, sizeof(node->rand));
+    }
+    for (auto node = head; node != nullptr; node = node->next) {
+
+        number = node->rand ? map.find(node->rand->next)->second : -1;
         stream << number << std::endl;
     }
 }
@@ -70,13 +74,16 @@ void List::Deserialize(std::istream &stream) {
     std::string data;
     for (int index = 0; index < length; ++index) {
         stream >> data;
+        //stream.getline(data,);
         InsertTail(data);
         refs.push_back(tail);
     }
     int index;
     for (auto node = head; node != nullptr; node = node->next) {
         stream >> index;
-        node->rand = refs[index];
+        if (index != -1) {
+            node->rand = refs[index];
+        }
     }
 }
 
