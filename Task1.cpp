@@ -7,7 +7,7 @@
 
 struct Digit {
     explicit Digit(int a) {
-        data.resize(sizeof(a) * CHAR_BIT, false);
+        data.assign(sizeof(a) * 8, false);
         for (long i = data.size() - 1; i >= 0 ; --i) {
             data[i] = (a & 1) == 1;
             a >>= 1;
